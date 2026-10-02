@@ -31,17 +31,6 @@ proc resetOverlapped(slot: var PipeSlot) {.inline.} =
   slot.ov.hEvent = ev
   discard ninst.Win32.ResetEvent(ev)
 
-proc closePipe(slot: var PipeSlot) {.inline.} =
-  if slot.pipe != NULL_HANDLE and slot.pipe != INVALID_HANDLE_VALUE:
-    discard ninst.Win32.CloseHandle(slot.pipe)
-  slot.pipe = NULL_HANDLE
-  slot.state = stClosed
-  slot.pending = false
-  slot.closeAfterWrite = false
-  slot.offset = 0'u32
-  slot.target = 0'u32
-  slot.outLen = 0'u32
-
 proc createPipe(slot: var PipeSlot, firstFlag: bool): bool =
   var flags = PIPE_ACCESS_DUPLEX or FILE_FLAG_OVERLAPPED
   if firstFlag:

@@ -1,5 +1,6 @@
 import ../src/instance
 import ../src/winapi
+import ../src/utils/chkstk
 import ../src/protocol/[framing, messages]
 import ../src/transport/pipe_client
 

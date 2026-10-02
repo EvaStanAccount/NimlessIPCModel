@@ -1,4 +1,5 @@
 import instance
+import utils/chkstk
 import transport/pipe_server
 
 {.passC:"-masm=intel".}

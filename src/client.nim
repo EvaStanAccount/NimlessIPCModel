@@ -1,5 +1,6 @@
 import instance
 import winapi
+import utils/chkstk
 import protocol/messages
 import transport/pipe_client
 

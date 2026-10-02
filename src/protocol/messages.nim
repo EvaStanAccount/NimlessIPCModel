@@ -206,7 +206,13 @@ proc parseRequest*(data: pointer, len: int, req: var Request, err: var ErrorCode
       if haveOp: err = errInvalidRequest; return false
       haveOp = true
       let st = parseString(c, opBuf[0].addr, opBuf.len, opLen)
-      if st != jsOk: err = if st == jsInvalid: errInvalidJson else: errInvalidRequest; return false
+      if st != jsOk: 
+        if st == jsInvalid: 
+          err = errInvalidJson 
+        else: 
+          err = errInvalidRequest
+        return false
+
       if bytesEqLit(opBuf[0].addr, opLen, "ping"):
         req.op = opPing
       elif bytesEqLit(opBuf[0].addr, opLen, "echo"):
@@ -220,7 +226,12 @@ proc parseRequest*(data: pointer, len: int, req: var Request, err: var ErrorCode
       if haveText: err = errInvalidRequest; return false
       haveText = true
       let st = parseString(c, req.text[0].addr, PROTOCOL_MAX_BODY, req.textLen)
-      if st != jsOk: err = if st == jsInvalid: errInvalidJson else: errInvalidRequest; return false
+      if st != jsOk: 
+        if st == jsInvalid: 
+          err = errInvalidJson 
+        else: 
+          err = errInvalidRequest
+        return false
     of 5:
       if haveA: err = errInvalidRequest; return false
       haveA = true
