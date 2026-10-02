@@ -100,6 +100,11 @@ proc appendErrorMessage(buf: ptr UncheckedArray[byte], pos: var int, cap: int, e
   of errResponseTooLarge: return appendLit(buf, pos, cap, "response too large")
   else: return appendLit(buf, pos, cap, "server error")
 
+proc hexNibble(n: byte): byte {.inline.} =
+  if n < 10'u8:
+    return cast[byte](cast[uint32]('0') + cast[uint32](n))
+  return cast[byte](cast[uint32]('a') + cast[uint32](n - 10'u8))
+
 proc appendEscaped*(buf: ptr UncheckedArray[byte], pos: var int, cap: int, text: pointer, textLen: int): bool =
   let p = cast[ptr UncheckedArray[byte]](text)
   var i = 0
@@ -131,9 +136,8 @@ proc appendEscaped*(buf: ptr UncheckedArray[byte], pos: var int, cap: int, text:
       if b < 0x20'u8:
         if pos + 6 > cap: return false
         buf[pos] = cast[byte]('\\'); buf[pos + 1] = cast[byte]('u'); buf[pos + 2] = cast[byte]('0'); buf[pos + 3] = cast[byte]('0')
-        const hex = "0123456789abcdef"
-        buf[pos + 4] = cast[byte](hex[cast[int>((b shr 4) and 0xf'u8)])
-        buf[pos + 5] = cast[byte](hex[cast[int](b and 0xf'u8)])
+        buf[pos + 4] = hexNibble((b shr 4) and 0xf'u8)
+        buf[pos + 5] = hexNibble(b and 0xf'u8)
         pos = pos + 6
       else:
         if pos >= cap: return false
