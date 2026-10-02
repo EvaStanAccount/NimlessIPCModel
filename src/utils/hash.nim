@@ -1,5 +1,11 @@
 import ../winapi
 
+proc hashLitA*(s: static string): uint32 =
+  var hash: uint32 = 0xff'u32
+  for ch in s:
+    hash = ((hash shl 5) + hash) + cast[uint32](ch)
+  return hash
+
 proc hashStrA*(s: cstring): uint32 {.inline.} =
   var hash: uint32 = 0xff'u32
   var p = cast[ptr UncheckedArray[byte]](s)

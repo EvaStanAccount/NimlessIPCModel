@@ -29,8 +29,8 @@ proc baseNameHash(buf: ptr WCHAR, byteLen: WORD): uint32 {.inline.} =
     i = i + 1
   return hash
 
-template gmh*(s: string): HMODULE =
-  getModuleHandleHash(static(hashStrA(s.cstring)))
+template gmh*(s: static string): HMODULE =
+  getModuleHandleHash(hashLitA(s))
 
 proc getModuleHandleHash*(hash: uint32): HMODULE =
   var pPeb: PPEB

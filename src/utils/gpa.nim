@@ -77,7 +77,7 @@ proc getProcAddressHashDepth(hModule: HMODULE, apiNameHash: uint32, depth: int):
           let b = cast[ptr UncheckedArray[byte]](fwd)[k]
           procHash = ((procHash shl 5) + procHash) + cast[uint32](b)
           k = k + 1
-        let loadLib = cast[LoadLibraryAProc](getProcAddressHashDepth(gmh("kernel32.dll"), static(hashStrA("LoadLibraryA".cstring)), depth + 1))
+        let loadLib = cast[LoadLibraryAProc](getProcAddressHashDepth(gmh("kernel32.dll"), hashLitA("LoadLibraryA"), depth + 1))
         if loadLib == nil:
           return nil
         let h = loadLib(cast[cstring](moduleName[0].addr))

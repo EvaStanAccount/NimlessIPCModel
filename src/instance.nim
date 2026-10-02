@@ -62,28 +62,28 @@ proc init*(ninst: var NIMLESS_INSTANCE): bool =
   if ninst.Module.kernel32 == NULL_HANDLE:
     return false
 
-  ninst.Win32.LoadLibraryA = cast[LoadLibraryAProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("LoadLibraryA".cstring))))
+  ninst.Win32.LoadLibraryA = cast[LoadLibraryAProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("LoadLibraryA")))
   if ninst.Win32.LoadLibraryA == nil:
     return false
 
-  ninst.Win32.ExitProcess = cast[ExitProcessProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("ExitProcess".cstring))))
-  ninst.Win32.GetLastError = cast[GetLastErrorProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("GetLastError".cstring))))
-  ninst.Win32.ReadFile = cast[ReadFileProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("ReadFile".cstring))))
-  ninst.Win32.WriteFile = cast[WriteFileProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("WriteFile".cstring))))
-  ninst.Win32.CloseHandle = cast[CloseHandleProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("CloseHandle".cstring))))
-  ninst.Win32.CreateNamedPipeW = cast[CreateNamedPipeWProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("CreateNamedPipeW".cstring))))
-  ninst.Win32.ConnectNamedPipe = cast[ConnectNamedPipeProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("ConnectNamedPipe".cstring))))
-  ninst.Win32.DisconnectNamedPipe = cast[DisconnectNamedPipeProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("DisconnectNamedPipe".cstring))))
-  ninst.Win32.CreateEventW = cast[CreateEventWProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("CreateEventW".cstring))))
-  ninst.Win32.ResetEvent = cast[ResetEventProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("ResetEvent".cstring))))
-  ninst.Win32.WaitForMultipleObjects = cast[WaitForMultipleObjectsProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("WaitForMultipleObjects".cstring))))
-  ninst.Win32.GetOverlappedResult = cast[GetOverlappedResultProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("GetOverlappedResult".cstring))))
-  ninst.Win32.CreateFileW = cast[CreateFileWProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("CreateFileW".cstring))))
-  ninst.Win32.WaitNamedPipeW = cast[WaitNamedPipeWProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("WaitNamedPipeW".cstring))))
-  ninst.Win32.Sleep = cast[SleepProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("Sleep".cstring))))
-  ninst.Win32.GetCommandLineW = cast[GetCommandLineWProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("GetCommandLineW".cstring))))
-  ninst.Win32.GetStdHandle = cast[GetStdHandleProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("GetStdHandle".cstring))))
-  ninst.Win32.WideCharToMultiByte = cast[WideCharToMultiByteProc](getProcAddressHash(ninst.Module.kernel32, static(hashStrA("WideCharToMultiByte".cstring))))
+  ninst.Win32.ExitProcess = cast[ExitProcessProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("ExitProcess")))
+  ninst.Win32.GetLastError = cast[GetLastErrorProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("GetLastError")))
+  ninst.Win32.ReadFile = cast[ReadFileProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("ReadFile")))
+  ninst.Win32.WriteFile = cast[WriteFileProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("WriteFile")))
+  ninst.Win32.CloseHandle = cast[CloseHandleProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("CloseHandle")))
+  ninst.Win32.CreateNamedPipeW = cast[CreateNamedPipeWProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("CreateNamedPipeW")))
+  ninst.Win32.ConnectNamedPipe = cast[ConnectNamedPipeProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("ConnectNamedPipe")))
+  ninst.Win32.DisconnectNamedPipe = cast[DisconnectNamedPipeProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("DisconnectNamedPipe")))
+  ninst.Win32.CreateEventW = cast[CreateEventWProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("CreateEventW")))
+  ninst.Win32.ResetEvent = cast[ResetEventProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("ResetEvent")))
+  ninst.Win32.WaitForMultipleObjects = cast[WaitForMultipleObjectsProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("WaitForMultipleObjects")))
+  ninst.Win32.GetOverlappedResult = cast[GetOverlappedResultProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("GetOverlappedResult")))
+  ninst.Win32.CreateFileW = cast[CreateFileWProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("CreateFileW")))
+  ninst.Win32.WaitNamedPipeW = cast[WaitNamedPipeWProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("WaitNamedPipeW")))
+  ninst.Win32.Sleep = cast[SleepProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("Sleep")))
+  ninst.Win32.GetCommandLineW = cast[GetCommandLineWProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("GetCommandLineW")))
+  ninst.Win32.GetStdHandle = cast[GetStdHandleProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("GetStdHandle")))
+  ninst.Win32.WideCharToMultiByte = cast[WideCharToMultiByteProc](getProcAddressHash(ninst.Module.kernel32, hashLitA("WideCharToMultiByte")))
 
   if not allResolved(ninst):
     return false
